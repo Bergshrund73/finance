@@ -19,6 +19,8 @@
     "leaf-db": "^3.6.0",
     "mongoose": "^6.8.0",
     "morgan": "~1.9.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "swagger-ui-express": "^4.6.0",
+    "yamljs": "^0.3.0"
   }
 }

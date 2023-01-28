@@ -1,0 +1,236 @@
+openapi: 3.0.3
+info:
+  title: Go-e charger emulator
+  description: |-
+    This is a simple charger emulator
+  version: 1.0.0
+servers:
+  - url: http://localhost:3005/api
+tags:
+  - name: charger
+    description: creating and managing virtual chargers
+paths:
+  /chargers/{chargerId}/update:
+    get:
+      tags:
+        - charger
+      summary: Update an existing charger
+      description: Update an existing charger by Id
+      operationId: updateCharger
+      parameters:
+        - name: chargerId
+          in: path
+          description: ID of the charger
+          required: true
+          schema:
+            type: string
+        - name: title
+          in: query
+          description: Chargers title
+          required: false
+          schema:
+            type: string
+        - name: version
+          in: query
+          description: Chargers version
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: v3
+            enum:
+              - v2
+              - v3
+              - v4
+              - controller
+        - name: isCharging
+          in: query
+          description: Chargers title
+          required: false
+          schema:
+            type: boolean
+            default: false
+            enum:
+              - true
+              - false
+        - name: isAuthAllowed
+          in: query
+          description: Chargers title
+          required: false
+          schema:
+            type: boolean
+            default: true
+            enum:
+              - true
+              - false
+        - name: isOnline
+          in: query
+          description: Chargers title
+          required: false
+          schema:
+            type: boolean
+            default: true
+            enum:
+              - true
+              - false
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Charger'
+        '400':
+          description: Invalid status value
+  /chargers:
+    post:
+      tags:
+        - charger
+      summary: Create new virtual charger
+      description: Create new virtual charger
+      operationId: addCharger
+      requestBody:
+        description: Create a new virtual charger
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Charger'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charger'
+        '405':
+          description: Invalid input
+    get:
+      tags:
+        - charger
+      summary: Get all chargers
+      description: Get all virtual chargers
+      operationId: getAlChargers
+      parameters:
+        - name: page
+          in: query
+          description: Current page
+          required: false
+          schema:
+            type: string
+            default: 1
+        - name: limit
+          in: query
+          description: Current page
+          required: false
+          schema:
+            type: string
+            default: 25
+        - name: version
+          in: query
+          description: Chargers version
+          required: false
+          explode: true
+          schema:
+            type: string
+            enum:
+              - v2
+              - v3
+              - v4
+              - controller
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Charger'
+        '400':
+          description: Invalid status value
+  /chargers/{chargerId}:
+    get:
+      tags:
+        - charger
+      summary: Get charger by id
+      description: Returns a single charger
+      operationId: getChargerById
+      parameters:
+        - name: chargerId
+          in: path
+          description: ID of the charger to return
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Charger'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Charger not found
+    delete:
+      tags:
+        - charger
+      summary: Deletes charger
+      description: delete charger
+      operationId: deleteCharger
+      parameters:
+        - name: chargerId
+          in: path
+          description: Charger id to delete
+          required: true
+          schema:
+            type: string
+      responses:
+        '400':
+          description: Invalid charger id value
+        '404':
+          description: Charger not found
+components:
+  schemas:
+    Charger:
+      required:
+        - title
+      type: object
+      properties:
+        title:
+          type: string
+          example: Go-e charger
+        serial:
+          type: number
+          example: 123456
+          required: true
+          uniqueItems: true
+        version:
+          type: string
+          description: chargers version
+          default: v3
+          enum:
+            - v2
+            - v3
+            - v4
+            - controller
+        isOnline:
+          type: boolean
+          default: true
+        isCharging:
+          type: boolean
+          default: false
+        isAuthAllowed:
+          type: boolean
+          default: true
+  requestBodies:
+    Charger:
+      description: Charger emulator object
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Charger'
