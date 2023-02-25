@@ -9,6 +9,7 @@ const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./openapi.yaml');
 const errorHandler = require('./middleware/error')
 const dummyRouter = require('./routes/dummy');
+const dataRouter = require('./routes/data');
 require('dotenv').config()
 
 const app = express();
@@ -26,6 +27,8 @@ app.use(cors({
 // здесь подключаются роуты, можно например сделать app.use('/api/v1/dummy', dummyRouter);
 app.use('/dummy', dummyRouter);
 
+app.use('/data', dataRouter);
+
 // подключение сваггера
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -33,3 +36,5 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(errorHandler);
 
 module.exports = app;
+
+

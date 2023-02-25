@@ -5,11 +5,51 @@ info:
     This is a simple charger emulator
   version: 1.0.0
 servers:
-  - url: http://localhost:3005/api
+  - url: http://localhost:3001/
 tags:
   - name: charger
     description: creating and managing virtual chargers
 paths:
+  /data:
+    get:
+      tags:
+        - data
+      summary: get all data
+      operationId: getAlldata
+      responses:
+        '200':
+           description: successful operation
+           content:
+            application/json:
+              schema:
+                
+                items:
+                  $ref: '#/components/schemas/data'
+    post:
+      tags:
+        - data
+      summary: Create new data
+      description: Create new data
+      operationId: createISIN
+      requestBody:
+        description: Create a new data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/data'
+        required: true
+      responses:
+        '200':
+           description: successful operation
+           content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/data'  
+        '405':
+          description: Invalid input 
+        '500':
+          description: Server Error       
   /chargers/{chargerId}/update:
     get:
       tags:
@@ -196,6 +236,12 @@ paths:
           description: Charger not found
 components:
   schemas:
+    data:
+      type: object
+      properties:
+        success:
+          type: string
+          example: true        
     Charger:
       required:
         - title
