@@ -5,7 +5,7 @@ info:
     This is a simple charger emulator
   version: 1.0.0
 servers:
-  - url: http://localhost:3001/
+  - url: http://127.0.0.1:3001/
 tags:
   - name: charger
     description: creating and managing virtual chargers
@@ -22,7 +22,6 @@ paths:
            content:
             application/json:
               schema:
-                
                 items:
                   $ref: '#/components/schemas/data'
     post:
@@ -239,9 +238,12 @@ components:
     data:
       type: object
       properties:
-        success:
+        yammy:
           type: string
-          example: true        
+          example: "ISIN"
+        title:
+          type: string
+          example: "001"        
     Charger:
       required:
         - title
