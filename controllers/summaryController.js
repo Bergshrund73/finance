@@ -7,9 +7,13 @@ const summarySchema = require('../db/schemas/summarySchema');
 exports.createSnapShot = asyncHandler(async (req, res, next) => {
     // здесь ты делаешь дестрактуризацию, сохраняешь переменные прямо из тела запроса,
     // типа тело запроса: {foo: bar}, получаем: const {foo} = req.body
-    const { yammy, title } = req.body;
+    const { date, summRubAll, summcash, summBlackDay,
+       summBankDepositBrokerCash, summBonds, summStocks,
+       summAlter, summTactic, exchageUsdRub} = req.body;
   
-    const result = await summarySchema.create({ yammy, title });
+    const result = await summarySchema.create({ date, summRubAll, summcash, summBlackDay,
+      summBankDepositBrokerCash, summBonds, summStocks,
+      summAlter, summTactic, exchageUsdRub });
     await result.save();
   
     res.status(200).json({success: true, result})

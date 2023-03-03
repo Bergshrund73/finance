@@ -302,12 +302,36 @@ components:
     summary:
       type: object
       properties:
-        yammy:
-          type: string
-          example: "ISIN"
-        title:
-          type: string
-          example: "001"
+        date:
+          type: Date
+          example: "2023-03-03"
+        summRubAll:
+          type: Number
+          example: "4000000"
+        summcash:
+          type: Number
+          example: "20000"
+        summBlackDay:
+          type: Number
+          example: "140000"
+        summBankDepositBrokerCash:
+          type: Number
+          example: "100000"
+        summBonds:
+          type: Number
+          example: "400000"
+        summStocks:
+          type: Number
+          example: "400000"
+        summAlter:
+          type: Number
+          example: "40000"
+        summTactic:
+          type: Number
+          example: "155000"
+        exchageUsdRub:
+          type: Number
+          example: "72.5"
   requestBodies:
     Charger:
       description: Charger emulator object
