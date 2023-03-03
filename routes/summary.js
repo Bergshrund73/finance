@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {
     getAlldata,
-    //getById,
+    addSummRubAll,
     createSnapShot,
     //update,
     //deleteById,
@@ -12,5 +12,9 @@ const {
   router.route('/')
   .post(createSnapShot)
   .get(getAlldata)
+
+
+  router.route('/addsumruball')
+  .post(addSummRubAll)
 
   module.exports = router;

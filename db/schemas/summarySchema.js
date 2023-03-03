@@ -9,10 +9,6 @@ const summarySchema = new Schema({
       unique: true,
       default: Date.now
     },
-  summRubAll: {
-      type: Number,
-      required: false,
-    },
   summcash: {
     type: Number,
     required: true,
