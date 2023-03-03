@@ -48,7 +48,31 @@ paths:
         '405':
           description: Invalid input 
         '500':
-          description: Server Error       
+          description: Server Error 
+  /summary:
+    post:
+      tags:
+        - summary
+      summary: creatie snapshot of values
+      description: create snapchot on the date
+      operationId: createSnapShot
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/summary'
+        required: true
+      responses:
+        '200':
+          description: successful operation
+           content:
+            application/json:
+              schema:
+                items:
+        '405':
+          description: Invalid input 
+        '500':
+          description: Server Error
   /chargers/{chargerId}/update:
     get:
       tags:
@@ -275,6 +299,15 @@ components:
         isAuthAllowed:
           type: boolean
           default: true
+    summary:
+      type: object
+      properties:
+        yammy:
+          type: string
+          example: "ISIN"
+        title:
+          type: string
+          example: "001"
   requestBodies:
     Charger:
       description: Charger emulator object
