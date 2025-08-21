@@ -9,38 +9,30 @@ const summarySchema = new Schema({
       unique: true,
       default: Date.now
     },
-  summcash: {
+  summCashRub: {
     type: Number,
     required: true,
     },
-  summBlackDay: {
+  summCashUsd: {
     type: Number,
     required: true,
     },
-  summBankDepositBrokerCash: {
+  summBankOpen: {
     type: Number,
     required: true,
     },
-  summBonds: {
-    type: Number,
-    required: true,
-    },
-  summStocks: {
-    type: Number,
-    required: true,
-    },
-  summAlter: {
-    type: Number,
-    required: true,
-    },
-  summTactic: {
+  summBroker: {
     type: Number,
     required: true,
     },
   exchageUsdRub: {
     type: Number,
     required: true,
-    }
+    },
+  summTotal: {
+      type: Number,
+      required: false,
+      },  
   },
   {
     versionKey: false
